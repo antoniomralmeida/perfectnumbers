@@ -95,7 +95,7 @@ func main() {
 		mn *big.Int
 		wg sync.WaitGroup
 	)
-
+	start := time.Now()
 	if len(os.Args) == 1 {
 		fmt.Println("Usage: perfectnumbers <p>")
 		os.Exit(1)
@@ -112,8 +112,9 @@ func main() {
 		go testNumber(&wg, mn, p)
 	}
 	wg.Wait()
-	fmt.Println("Done.")
 
+	elapsed := time.Since(start)
+	fmt.Printf("Done [%s].", elapsed)
 }
 
 func testNumber(wg *sync.WaitGroup, n *big.Int, p int64) {
